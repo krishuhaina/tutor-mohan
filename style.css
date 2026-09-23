@@ -1,0 +1,7 @@
+/* Tutor Mohan - Premium Blue Orange - 100% Free */
+:root{--navy:#0F2C5C;--orange:#FF8C00;--bg:#F6F8FB;--border:#E2E8F0}
+body{font-family:system-ui,sans-serif;background:var(--bg)}
+.logo{font-weight:900;color:var(--navy)}.logo span{color:var(--orange)}
+.btn{padding:10px 20px;border-radius:30px;font-weight:800;border:0;cursor:pointer}
+.btn-o{background:var(--orange);color:#fff}.btn-b{background:var(--navy);color:#fff}
+.card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:20px}
