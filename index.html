@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0a1122" />
+<title>Tutor Mohan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+<script>
+/* shows a red bar if any script fails, so problems are easy to report */
+window.addEventListener("error", function (e) {
+  // ignore failed fonts or images; only report scripts that break
+  if (e.target && e.target !== window && e.target.tagName && e.target.tagName !== "SCRIPT") return;
+  var b = document.getElementById("errBar");
+  if (!b) { b = document.createElement("div"); b.id = "errBar";
+    b.style.cssText = "position:fixed;left:0;right:0;bottom:0;z-index:99999;background:#b91c1c;color:#fff;font:13px/1.4 system-ui,sans-serif;padding:8px 12px";
+    (document.body || document.documentElement).appendChild(b); }
+  var f = (e.filename || "").split("/").pop();
+  b.textContent = "⚠ Error: " + (e.message || "script failed to load") + (f ? "  [" + f + ":" + (e.lineno || "?") + "]" : "") + "  — send this line to your developer.";
+}, true);
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"></script>
+<script>window.Peer || document.write('<script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"><\/script>')</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <!-- Stroke icons, 24x24 grid (Lucide-style geometry, ISC licence). Styled by .ic in style.css -->
+  <symbol id="i-mic" viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v3"/></symbol>
+  <symbol id="i-mic-off" viewBox="0 0 24 24"><path d="m2 2 20 20"/><path d="M18.89 13.23A7.12 7.12 0 0 0 19 12v-2"/><path d="M5 10v2a7 7 0 0 0 12 5"/><path d="M15 9.34V5a3 3 0 0 0-5.68-1.33"/><path d="M9 9v3a3 3 0 0 0 5.12 2.12"/><path d="M12 19v3"/></symbol>
+  <symbol id="i-cam" viewBox="0 0 24 24"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"/><rect x="2" y="6" width="14" height="12" rx="2"/></symbol>
+  <symbol id="i-cam-off" viewBox="0 0 24 24"><path d="M10.66 6H14a2 2 0 0 1 2 2v2.5l5.248-3.062A.5.5 0 0 1 22 7.87v8.196"/><path d="M16 16a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h2"/><path d="m2 2 20 20"/></symbol>
+  <symbol id="i-screen" viewBox="0 0 24 24"><path d="M13 3H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-3"/><path d="M8 21h8"/><path d="M12 17v4"/><path d="m17 8 5-5"/><path d="M17 3h5v5"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+  <symbol id="i-hand" viewBox="0 0 24 24"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></symbol>
+  <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+  <symbol id="i-rec" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-stop" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><rect x="8.5" y="8.5" width="7" height="7" rx="1.2" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="12" cy="10.5" r="2.5"/><path d="M7.5 17c.7-1.9 2.4-3 4.5-3s3.8 1.1 4.5 3"/></symbol>
+  <symbol id="i-split" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M12 4v16"/></symbol>
+  <symbol id="i-board" viewBox="0 0 24 24"><path d="M3 4h18"/><path d="M4.5 4v10a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V4"/><path d="m8 21 4-5 4 5"/><path d="m8.5 12 2.5-3 2 2 2.5-3"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M14.5 21.7a.5.5 0 0 0 .95-.03L21.98 2.7a.5.5 0 0 0-.68-.68L2.3 8.55a.5.5 0 0 0-.03.95l7.6 3.06a2 2 0 0 1 1.1 1.1z"/><path d="m21.85 2.15-10.9 10.9"/></symbol>
+  <symbol id="i-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m5.6 5.6 12.8 12.8"/></symbol>
+  <symbol id="i-blur" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.2"/><circle cx="12" cy="12" r="5.8" stroke-dasharray="1.6 2.6"/><circle cx="12" cy="12" r="9.4" stroke-dasharray="1 3.4"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></symbol>
+  <symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11"/></symbol>
+  <symbol id="i-redo" viewBox="0 0 24 24"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5A5.5 5.5 0 0 0 4 14.5A5.5 5.5 0 0 0 9.5 20H13"/></symbol>
+  <symbol id="i-zoom-in" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6"/><path d="M8 11h6"/></symbol>
+  <symbol id="i-zoom-out" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M8 11h6"/></symbol>
+  <symbol id="i-fit" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></symbol>
+  <symbol id="i-chev-l" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+  <symbol id="i-chev-r" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></symbol>
+  <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.09-3.09a2 2 0 0 0-2.82 0L6 21"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-fill" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3" fill="currentColor" fill-opacity=".38"/></symbol>
+  <symbol id="i-dash" viewBox="0 0 24 24"><path d="M3 12h4M10 12h4M17 12h4"/></symbol>
+  <!-- whiteboard tools -->
+  <symbol id="i-select" viewBox="0 0 24 24"><path d="M4.037 4.688a.495.495 0 0 1 .651-.651l16 6.5a.5.5 0 0 1-.063.947l-6.124 1.58a2 2 0 0 0-1.438 1.435l-1.579 6.126a.5.5 0 0 1-.947.063z"/></symbol>
+  <symbol id="i-move" viewBox="0 0 24 24"><path d="m5 9-3 3 3 3"/><path d="m9 5 3-3 3 3"/><path d="m15 19-3 3-3-3"/><path d="m19 9 3 3-3 3"/><path d="M2 12h20"/><path d="M12 2v20"/></symbol>
+  <symbol id="i-laser" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.6" fill="currentColor" stroke="none"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></symbol>
+  <symbol id="i-highlighter" viewBox="0 0 24 24"><path d="m9 11-6 6v3h9l3-3"/><path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4"/></symbol>
+  <symbol id="i-eraser" viewBox="0 0 24 24"><path d="M21 21H8a2 2 0 0 1-1.42-.587l-3.994-3.999a2 2 0 0 1 0-2.828l10-10a2 2 0 0 1 2.829 0l5.999 6a2 2 0 0 1 0 2.828L12.834 21"/><path d="m5.082 11.09 8.828 8.828"/></symbol>
+  <symbol id="i-text" viewBox="0 0 24 24"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></symbol>
+  <symbol id="i-line" viewBox="0 0 24 24"><path d="M5 19 19 5"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 19 19 5"/><path d="M9 5h10v10"/></symbol>
+  <symbol id="i-darrow" viewBox="0 0 24 24"><path d="M5 19 19 5"/><path d="M9 5h10v10"/><path d="M15 19H5V9"/></symbol>
+  <symbol id="i-rect" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/></symbol>
+  <symbol id="i-ellipse" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9.5" ry="7"/></symbol>
+  <symbol id="i-triangle" viewBox="0 0 24 24"><path d="M12 4 21.5 20h-19z"/></symbol>
+  <symbol id="i-rtri" viewBox="0 0 24 24"><path d="M4.5 4v16h15z"/><path d="M4.5 16h4v4"/></symbol>
+  <symbol id="i-diamond" viewBox="0 0 24 24"><path d="M12 2.5 21.5 12 12 21.5 2.5 12z"/></symbol>
+  <symbol id="i-hexagon" viewBox="0 0 24 24"><path d="M7 4h10l5 8-5 8H7l-5-8z"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.8l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.6l-5.9 3.2 1.2-6.5L2.5 9.7l6.6-.9z"/></symbol>
+  <symbol id="i-numline" viewBox="0 0 24 24"><path d="M2.5 12h19"/><path d="M6 9v6M12 9v6M18 9v6"/></symbol>
+  <symbol id="i-axes" viewBox="0 0 24 24"><path d="M3 12h18M12 3v18" /><path d="M7.5 3v18M16.5 3v18M3 7.5h18M3 16.5h18" opacity=".35"/></symbol>
+  <symbol id="i-shapes" viewBox="0 0 24 24"><rect x="3" y="3" width="10" height="10" rx="1.6"/><circle cx="16" cy="16" r="5"/></symbol>
+  <symbol id="i-ruler" viewBox="0 0 24 24"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/><path d="m17.5 15.5 2-2"/></symbol>
+</svg>
+
+
+<!-- ============ TOP BAR ============ -->
+<header id="top">
+  <div class="brandChip"><span id="brandLogo" class="brandLogo"></span><b id="appName">Tutor Mohan</b></div>
+  <div id="netPill" class="netPill" title="Connection status"><span id="netDot" class="netDot"></span><span id="netLbl" class="lbl">Connected</span></div>
+  <span id="clock" class="clock" hidden title="Class time">00:00</span>
+
+  <nav class="seg" aria-label="Screen layout">
+    <button type="button" data-mode="video" title="Video only" aria-label="Video only"><svg class="ic"><use href="#i-video"/></svg><span class="lbl">Video</span></button>
+    <button type="button" data-mode="split" title="Video and whiteboard side by side" aria-label="Split view"><svg class="ic"><use href="#i-split"/></svg><span class="lbl">Split</span></button>
+    <button type="button" data-mode="board" title="Whiteboard full screen, video in a small window" aria-label="Whiteboard"><svg class="ic"><use href="#i-board"/></svg><span class="lbl">Whiteboard</span></button>
+  </nav>
+
+  <span class="sp"></span>
+
+  <label id="showAllWrap" class="syncChip" style="display:none" title="When on, students see the same screen layout as you">
+    <span class="switch"><input type="checkbox" id="showAll" checked><span></span></span><span class="lbl">Sync view</span>
+  </label>
+  <span id="recBadge" class="recBadge" style="display:none"><i></i>REC</span>
+  <button type="button" id="recBtn" class="tbtn" style="display:none" title="Record the class (saved to your computer)"><svg class="ic"><use href="#i-rec"/></svg><span class="lbl">Record</span></button>
+  <button type="button" id="shareBtn" class="tbtn" style="display:none" title="Copy or send the class link"><svg class="ic"><use href="#i-link"/></svg><span class="lbl">Invite</span></button>
+  <button type="button" id="permBtn" class="tbtn" style="display:none" title="People: attendance, mute, remove, drawing access"><svg class="ic"><use href="#i-users"/></svg><span class="lbl">People</span><span id="pBadge" class="cnt">0</span><span id="handBadge" class="hbadge" style="display:none"></span></button>
+  <button type="button" id="chatBtn" class="tbtn" title="Chat"><svg class="ic"><use href="#i-chat"/></svg><span class="lbl">Chat</span><span id="badge"></span></button>
+</header>
+<div id="warns"></div>
+<div id="toasts" aria-live="polite"></div>
+
+<!-- ============ POPOVER PANELS ============ -->
+<div id="permPanel" class="panel" role="dialog" aria-label="People">
+  <div class="ph"><b>People</b><span id="pCount" class="muted2"></span><button type="button" class="ib" data-close="permPanel" aria-label="Close"><svg class="ic"><use href="#i-x"/></svg></button></div>
+  <div class="popts">
+    <label class="opt"><span>Everyone can draw</span><span class="switch"><input type="checkbox" id="allowAll"><span></span></span></label>
+    <label class="opt"><span>Students can chat</span><span class="switch"><input type="checkbox" id="chatOnChk" checked><span></span></span></label>
+    <label class="opt" title="Blocks new students from joining. Students already inside stay."><span>Lock class (no new joins)</span><span class="switch"><input type="checkbox" id="lockClass"><span></span></span></label>
+  </div>
+  <div id="permList"></div>
+  <div class="pbtns">
+    <button type="button" id="muteAll" class="btn"><svg class="ic"><use href="#i-mic-off"/></svg>Mute all</button>
+    <button type="button" id="attDl" class="btn"><svg class="ic"><use href="#i-download"/></svg>Attendance (CSV)</button>
+  </div>
+</div>
+
+<div id="sharePanel" class="panel" role="dialog" aria-label="Invite students">
+  <div class="ph"><b>Invite students</b><button type="button" class="ib" data-close="sharePanel" aria-label="Close"><svg class="ic"><use href="#i-x"/></svg></button></div>
+  <p class="muted2" style="margin:0 0 8px">Students open this link, type their name and join. Video, audio and whiteboard all run inside the page.</p>
+  <input type="text" id="shareUrl" spellcheck="false" autocomplete="off" title="You can edit this link" aria-label="Class link">
+  <div class="warn" id="shareWarn">This looks like a <b>local address</b>, so it only works on this computer. Paste the public address where your page is hosted into the box above.</div>
+  <div class="row">
+    <button type="button" id="shareCopy" class="btn primary"><svg class="ic"><use href="#i-link"/></svg>Copy link</button>
+    <button type="button" id="shareNative" class="btn" style="display:none">Share…</button>
+    <button type="button" id="shareWa" class="btn">WhatsApp</button>
+    <button type="button" id="shareMail" class="btn">Email</button>
+  </div>
+  <div id="shareMsg" class="shareMsg"></div>
+</div>
+
+<div id="bgPanel" class="panel" role="dialog" aria-label="Background effects">
+  <div class="ph"><b>Background</b><span id="bgState" class="muted2"></span><button type="button" class="ib" data-close="bgPanel" aria-label="Close"><svg class="ic"><use href="#i-x"/></svg></button></div>
+  <div id="bgGrid" class="bgGrid"></div>
+  <input type="file" id="bgFile" accept="image/*" hidden>
+  <p class="muted2" id="bgNote" style="margin:10px 0 0">Effects run on your own device. Works best in Chrome or Edge.</p>
+</div>
+
+<div id="gridMenu" class="panel menu" role="menu" aria-label="Board background">
+  <button type="button" role="menuitemradio" data-grid="dots"><svg class="ic"><use href="#i-check"/></svg>Dots</button>
+  <button type="button" role="menuitemradio" data-grid="grid"><svg class="ic"><use href="#i-check"/></svg>Squares (maths)</button>
+  <button type="button" role="menuitemradio" data-grid="lines"><svg class="ic"><use href="#i-check"/></svg>Ruled lines</button>
+  <button type="button" role="menuitemradio" data-grid="plain"><svg class="ic"><use href="#i-check"/></svg>Plain white</button>
+</div>
+
+<!-- ============ MAIN ============ -->
+<div id="main" data-mode="video">
+  <div id="stage">
+    <div id="vwrap">
+      <div id="vbar"><span>Video call · drag to move</span><button type="button" id="vSplit" title="Back to split view" aria-label="Back to split view"><svg class="ic"><use href="#i-split"/></svg></button></div>
+      <div id="vgrid"></div>
+      <div id="vstatus"></div>
+      <div id="vctl">
+        <div class="dock" role="toolbar" aria-label="Call controls">
+          <button type="button" id="micBtn" class="dbtn" title="Mute / unmute microphone" aria-label="Microphone"><svg class="ic"><use href="#i-mic"/></svg></button>
+          <button type="button" id="camBtn" class="dbtn" title="Turn camera on / off" aria-label="Camera"><svg class="ic"><use href="#i-cam"/></svg></button>
+          <button type="button" id="fxBtn" class="dbtn" title="Background: blur or replace" aria-label="Background effects"><svg class="ic"><use href="#i-sparkles"/></svg></button>
+          <button type="button" id="handBtn" class="dbtn" title="Raise / lower your hand" aria-label="Raise hand" style="display:none"><svg class="ic"><use href="#i-hand"/></svg></button>
+          <button type="button" id="scrBtn" class="dbtn" title="Share your screen" aria-label="Share screen"><svg class="ic"><use href="#i-screen"/></svg></button>
+          <span class="dsep"></span>
+          <button type="button" id="leaveBtn" class="dbtn leave" title="Leave the class" aria-label="Leave class"><svg class="ic hang"><use href="#i-phone"/></svg></button>
+        </div>
+      </div>
+      <div id="vgrip" title="Drag to resize"></div>
+    </div>
+    <div id="split" title="Drag to resize"></div>
+
+    <section id="board">
+      <div id="docbar">
+        <div class="grp needdraw">
+          <button type="button" id="pdfBtn" class="btn sm" title="Open a PDF from your computer"><svg class="ic"><use href="#i-file"/></svg>Open PDF</button>
+          <input type="file" id="pdfFile" accept="application/pdf" hidden>
+        </div>
+        <div class="grp pager">
+          <button type="button" id="pPrev" class="ib needdraw" title="Previous page" aria-label="Previous page"><svg class="ic"><use href="#i-chev-l"/></svg></button>
+          <span id="pLbl" class="pLbl">Board</span>
+          <button type="button" id="pNext" class="ib needdraw" title="Next page" aria-label="Next page"><svg class="ic"><use href="#i-chev-r"/></svg></button>
+          <button type="button" id="pBoard" class="btn sm needdraw" title="Back to the blank board">Blank board</button>
+        </div>
+        <span class="sp"></span>
+        <label class="grp needdraw shareTgl" title="When on, everyone sees the PDF page you show"><span class="switch"><input type="checkbox" id="share" checked><span></span></span><span>Share page</span></label>
+        <div class="grp needdraw">
+          <button type="button" id="gridBtn" class="btn sm" title="Board background" aria-haspopup="menu"><svg class="ic"><use href="#i-grid"/></svg><span class="lbl">Background</span></button>
+        </div>
+        <div class="grp">
+          <button type="button" id="saveBtn" class="ib" title="Save this view as an image (PNG)" aria-label="Save as PNG"><svg class="ic"><use href="#i-download"/></svg></button>
+          <button type="button" id="clearBtn" class="ib needdraw" title="Clear this page for everyone" aria-label="Clear page"><svg class="ic"><use href="#i-trash"/></svg></button>
+        </div>
+      </div>
+
+      <div id="bmain">
+        <div id="tools" class="needdraw" role="toolbar" aria-label="Drawing tools" aria-orientation="vertical">
+          <button type="button" class="tb" data-tool="select" title="Select and move (V)" aria-label="Select"><svg class="ic"><use href="#i-select"/></svg></button>
+          <button type="button" class="tb" data-tool="hand" title="Pan (H, or hold Space)" aria-label="Pan"><svg class="ic"><use href="#i-move"/></svg></button>
+          <button type="button" class="tb" data-tool="laser" title="Laser pointer (K)" aria-label="Laser pointer"><svg class="ic"><use href="#i-laser"/></svg></button>
+          <i class="tsep"></i>
+          <button type="button" class="tb" data-tool="pen" title="Pen (P)" aria-label="Pen"><svg class="ic"><use href="#i-pen"/></svg></button>
+          <button type="button" class="tb" data-tool="hl" title="Highlighter (M)" aria-label="Highlighter"><svg class="ic"><use href="#i-highlighter"/></svg></button>
+          <button type="button" class="tb" data-tool="eraser" title="Eraser (E)" aria-label="Eraser"><svg class="ic"><use href="#i-eraser"/></svg></button>
+          <i class="tsep"></i>
+          <button type="button" class="tb tgrp" id="grpShapes" data-group="shapes" title="Shapes" aria-label="Shapes" aria-haspopup="true"><svg class="ic"><use href="#i-shapes"/></svg></button>
+          <button type="button" class="tb tgrp" id="grpMath" data-group="math" title="Maths tools" aria-label="Maths tools" aria-haspopup="true"><svg class="ic"><use href="#i-ruler"/></svg></button>
+          <button type="button" class="tb" data-tool="text" title="Text (T)" aria-label="Text"><svg class="ic"><use href="#i-text"/></svg></button>
+        </div>
+
+        <div class="fly" id="flyShapes" role="toolbar" aria-label="Shapes">
+          <button type="button" class="tb" data-tool="line" title="Line (L)" aria-label="Line"><svg class="ic"><use href="#i-line"/></svg></button>
+          <button type="button" class="tb" data-tool="arrow" title="Arrow (A)" aria-label="Arrow"><svg class="ic"><use href="#i-arrow"/></svg></button>
+          <button type="button" class="tb" data-tool="darrow" title="Double arrow" aria-label="Double arrow"><svg class="ic"><use href="#i-darrow"/></svg></button>
+          <button type="button" class="tb" data-tool="rect" title="Rectangle (R)" aria-label="Rectangle"><svg class="ic"><use href="#i-rect"/></svg></button>
+          <button type="button" class="tb" data-tool="ellipse" title="Ellipse (O)" aria-label="Ellipse"><svg class="ic"><use href="#i-ellipse"/></svg></button>
+          <button type="button" class="tb" data-tool="triangle" title="Triangle" aria-label="Triangle"><svg class="ic"><use href="#i-triangle"/></svg></button>
+          <button type="button" class="tb" data-tool="rtri" title="Right triangle" aria-label="Right triangle"><svg class="ic"><use href="#i-rtri"/></svg></button>
+          <button type="button" class="tb" data-tool="diamond" title="Diamond" aria-label="Diamond"><svg class="ic"><use href="#i-diamond"/></svg></button>
+          <button type="button" class="tb" data-tool="hexagon" title="Hexagon" aria-label="Hexagon"><svg class="ic"><use href="#i-hexagon"/></svg></button>
+          <button type="button" class="tb" data-tool="star" title="Star" aria-label="Star"><svg class="ic"><use href="#i-star"/></svg></button>
+        </div>
+        <div class="fly list" id="flyMath" role="toolbar" aria-label="Maths tools">
+          <button type="button" class="tb wide" data-tool="numline" title="Number line: drag left to right"><svg class="ic"><use href="#i-numline"/></svg><span>Number line</span></button>
+          <button type="button" class="tb wide" data-tool="axes" title="Coordinate grid: drag corner to corner"><svg class="ic"><use href="#i-axes"/></svg><span>Coordinate grid</span></button>
+        </div>
+
+        <div id="cvwrap">
+          <canvas id="cv"></canvas>
+
+          <div id="styleBar" class="needdraw floatbar">
+            <div class="colors" id="colors"><input type="color" id="colorPick" value="#111111" title="Custom colour" aria-label="Custom colour"></div>
+            <span class="vsep" data-for="size"></span>
+            <label class="thick" id="sizeWrap" title="Thickness"><span class="dotprev"><i id="sizePrev"></i></span><input type="range" id="size" min="1" max="30" value="4" aria-label="Thickness"><span id="sizeLbl" class="sizeLbl">4</span></label>
+            <span class="vsep" data-for="toggles"></span>
+            <button type="button" id="fillBtn" class="tgl" aria-pressed="false" title="Fill shapes with colour"><svg class="ic"><use href="#i-fill"/></svg><span>Fill</span></button>
+            <button type="button" id="dashBtn" class="tgl" aria-pressed="false" title="Dashed lines"><svg class="ic"><use href="#i-dash"/></svg><span>Dashed</span></button>
+          </div>
+
+          <div id="histBar" class="needdraw floatbar">
+            <button type="button" id="undoBtn" class="ib" title="Undo (Ctrl+Z)" aria-label="Undo"><svg class="ic"><use href="#i-undo"/></svg></button>
+            <button type="button" id="redoBtn" class="ib" title="Redo (Ctrl+Y)" aria-label="Redo"><svg class="ic"><use href="#i-redo"/></svg></button>
+          </div>
+          <div id="zoomBar" class="floatbar">
+            <button type="button" id="zOut" class="ib" title="Zoom out" aria-label="Zoom out"><svg class="ic"><use href="#i-zoom-out"/></svg></button>
+            <span id="zLbl" class="zLbl">100%</span>
+            <button type="button" id="zIn" class="ib" title="Zoom in" aria-label="Zoom in"><svg class="ic"><use href="#i-zoom-in"/></svg></button>
+            <button type="button" id="zFit" class="ib" title="Fit to screen" aria-label="Fit to screen"><svg class="ic"><use href="#i-fit"/></svg></button>
+          </div>
+          <div id="viewOnly">View only · your teacher can give you drawing access</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <aside id="chat" aria-label="Chat">
+    <div class="chead"><h3>Chat</h3><button type="button" id="chatClose" class="ib" title="Close chat" aria-label="Close chat"><svg class="ic"><use href="#i-x"/></svg></button></div>
+    <div id="chatLog"></div>
+    <form id="chatForm" autocomplete="off">
+      <input id="chatInput" placeholder="Type a message…" aria-label="Message" />
+      <button id="chatSend" type="submit" title="Send" aria-label="Send"><svg class="ic"><use href="#i-send"/></svg></button>
+    </form>
+  </aside>
+</div>
+
+<!-- ============ JOIN SCREEN ============ -->
+<div id="prejoin">
+  <div class="card">
+    <div id="pjLogo" class="pjLogo"></div>
+    <h1 id="pjName">Tutor Mohan</h1>
+    <p id="pjTag" class="pjTag"></p>
+    <p id="pjWelcome" class="pjWelcome"></p>
+    <label>Your name <input id="pjUser" maxlength="40" placeholder="Enter your full name" autocomplete="name"></label>
+    <label id="pjTeacherRow" style="display:none">Teacher passcode <input id="pjPass" type="password" autocomplete="current-password"></label>
+    <div class="btns"><button id="pjStudent" class="primary" type="button">Join class</button><button id="pjTeacher" type="button">Teacher login</button></div>
+    <p class="muted" id="pjMsg"></p>
+    <ul class="pjTips">
+      <li><svg class="ic"><use href="#i-cam"/></svg>Allow camera and microphone when your browser asks.</li>
+      <li><svg class="ic"><use href="#i-sparkles"/></svg>Blur or replace your background once you are in the class.</li>
+      <li><svg class="ic"><use href="#i-mic"/></svg>Use headphones to avoid echo.</li>
+    </ul>
+    <p class="pjFoot" id="pjFoot"></p>
+    <p class="pjFoot" id="pjVer" style="opacity:.6"></p>
+  </div>
+</div>
+
+<div id="ended">
+  <div id="endedLogo" class="pjLogo"></div>
+  <h1 id="endedName">Tutor Mohan</h1>
+  <p id="endedMsg">The class has ended. Thanks for joining!</p>
+  <button id="rejoin" type="button">Rejoin class</button>
+</div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
